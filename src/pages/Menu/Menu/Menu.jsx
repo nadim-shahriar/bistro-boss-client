@@ -37,6 +37,7 @@ const Menu = () => {
                     subHeading={"---Don't Miss---"}
                 ></SectionTitle>
                 <MenuCategory
+                    title={'offered'}
                     item={offered}
                 ></MenuCategory>
             </div>
@@ -46,6 +47,7 @@ const Menu = () => {
                     img={desertImg}
                 ></ItemCover>
                 <MenuCategory
+                    title={'dessert'}
                     item={dessert}
                 ></MenuCategory>
             </div>
@@ -55,6 +57,7 @@ const Menu = () => {
                     img={pizzaImg}
                 ></ItemCover>
                 <MenuCategory
+                    title={'pizza'}
                     item={pizza}
                 ></MenuCategory>
             </div>
@@ -64,6 +67,7 @@ const Menu = () => {
                     img={saladImg}
                 ></ItemCover>
                 <MenuCategory
+                    title={'salad'}
                     item={salad}
                 ></MenuCategory>
             </div>
@@ -73,6 +77,7 @@ const Menu = () => {
                     img={soupImg}
                 ></ItemCover>
                 <MenuCategory
+                    title={'soup'}
                     item={soup}
                 ></MenuCategory>
             </div>

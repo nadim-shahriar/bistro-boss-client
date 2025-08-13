@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cartOptionImg from "../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png"
 import { RiAccountCircleFill } from "react-icons/ri";
 
 const NavBar = () => {
-
+    
     const navOptions = <>
         <NavLink to={'/'} className={({ isActive }) =>
             isActive ? 'text-yellow-400' : "text-base"}>
@@ -21,7 +21,7 @@ const NavBar = () => {
             isActive ? 'text-yellow-400' : "text-base"}>
             <li className="uppercase font-semibold"><a>Our menu</a></li>
         </NavLink>
-        <NavLink to={'/order'} className={({ isActive }) =>
+        <NavLink to={'/order/salad'} className={({ isActive }) =>
             isActive ? 'text-yellow-400' : "text-base"}>
             <li className="uppercase font-semibold"><a>Our shop</a></li>
         </NavLink>
@@ -45,7 +45,7 @@ const NavBar = () => {
                         {navOptions}
                     </ul>
                 </div>
-                <a className="btn h-[70px] btn-ghost text-2xl cinzelFont uppercase font-bold flex-col hover:bg-transparent hover:border-none hover:shadow-none hover:text-yellow-300">Bistro Boss <span className="text-lg font-medium tracking-[4px]">Restaurant</span></a>
+                <Link to={'/'} className="btn h-[70px] btn-ghost text-2xl cinzelFont uppercase font-bold flex-col hover:bg-transparent hover:border-none hover:shadow-none hover:text-yellow-300">Bistro Boss <span className="text-lg font-medium tracking-[4px]">Restaurant</span></Link>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu items-center menu-horizontal">
