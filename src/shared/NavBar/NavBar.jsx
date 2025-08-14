@@ -3,7 +3,7 @@ import cartOptionImg from "../../assets/icon/151-1511569_cart-notifications-free
 import { RiAccountCircleFill } from "react-icons/ri";
 
 const NavBar = () => {
-    
+
     const navOptions = <>
         <NavLink to={'/'} className={({ isActive }) =>
             isActive ? 'text-yellow-400' : "text-base"}>
@@ -53,7 +53,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="">
-                <a className="btn uppercase -ml-5 w-36 mr-10 bg-transparent border-none shadow-none text-white font-bold">Sign Out<RiAccountCircleFill className="text-4xl"></RiAccountCircleFill></a>
+                <Link to={'/login'}><a className="btn uppercase -ml-5 w-36 mr-10 bg-transparent border-none shadow-none text-white font-bold">Sign Out<RiAccountCircleFill className="text-4xl"></RiAccountCircleFill></a></Link>
             </div>
         </div>
     );
