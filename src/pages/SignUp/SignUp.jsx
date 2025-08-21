@@ -24,7 +24,7 @@ const SignUp = () => {
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
 
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext)
 
     const onSubmit = (data) => {
         console.log(data)
@@ -42,22 +42,22 @@ const SignUp = () => {
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
-                                if(res.data.insertedId){
+                                if (res.data.insertedId) {
                                     console.log(res.data)
                                     reset();
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "User Created Successfully.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        navigate('/')
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "User Created Successfully.",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/')
 
-                                } 
+                                }
                             })
 
-                        
+
                     })
                     .catch(error => console.log(error))
             })
@@ -67,6 +67,13 @@ const SignUp = () => {
     // const captchaRef = useRef(null)
     // const [disable, setDisable] = useState(true)
 
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(res=>{
+                console.log(res.user)
+                navigate('/')
+            })
+    }
 
 
     // useEffect(() => {
@@ -157,15 +164,16 @@ const SignUp = () => {
                             <Link to={'/login'}><p className="text-[#D1A054B2]  hover:underline text-center my-3">Already registered? Go to log in</p></Link>
                             <p className="text-center">Or Sign In With</p>
                             <div className="flex mt-3 gap-7 justify-center text-[#444444] text-lg">
-                                <a className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><TiSocialFacebook></TiSocialFacebook></a>
-                                <a className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><IoLogoGoogle></IoLogoGoogle></a>
-                                <a className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><FaGithub></FaGithub></a>
+                                <button className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><TiSocialFacebook></TiSocialFacebook></button>
+                                <button onClick={handleGoogleSignIn} className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><IoLogoGoogle></IoLogoGoogle></button>
+                                <button className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><FaGithub></FaGithub></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         // <div className="bgImage p-20">
         //     <div className="hero min-h-screen">
         //         <div className="hero-content py-10 px-32 border-[#00000040] shadow-2xl flex flex-row-reverse gap-20">

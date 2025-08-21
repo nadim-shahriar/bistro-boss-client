@@ -21,7 +21,7 @@ const OrderTab = ({ items }) => {
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <div className="grid grid-cols-3 gap-5 my-10">
+                    <div className="grid md:grid-cols-3 gap-5 my-10">
                         {
                             items.slice(0, 6).map(item => <FoodCard
                                 item={item}
@@ -31,7 +31,7 @@ const OrderTab = ({ items }) => {
                 </SwiperSlide>
                 {
                     items.length > 6 && <SwiperSlide>
-                        <div className="grid grid-cols-3 gap-5 my-10">
+                        <div className="grid md:grid-cols-3 gap-5 my-10">
                             {
                                 items.slice(6, 12).map(item => <FoodCard
                                     item={item}
@@ -41,7 +41,7 @@ const OrderTab = ({ items }) => {
                     </SwiperSlide>}
                 {
                     items.length > 12 && <SwiperSlide>
-                        <div className="grid grid-cols-3 gap-5 my-10">
+                        <div className="grid md:grid-cols-3 gap-5 my-10">
                             {
                                 items.slice(12, items.length).map(item => <FoodCard
                                     item={item}

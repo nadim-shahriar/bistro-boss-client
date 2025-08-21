@@ -42,7 +42,7 @@ const Testimonials = () => {
                                 <FaQuoteLeft 
                                     className="mx-auto text-6xl my-8"
                                 ></FaQuoteLeft>
-                                <p className="md:px-52 mb-3 cinzelFont">{review.details}</p>
+                                <p className="px-12 md:px-52 mb-3 cinzelFont">{review.details}</p>
                                 <p className="text-3xl cinzelFont font-semibold uppercase text-yellow-600">{review.name}</p>
                             </div>
                         </div>

@@ -10,7 +10,7 @@ const Recommendation = () => {
                 heading={'chef recommends'}
                 subHeading={'---Should Try---'}
             ></SectionTitle>
-            <div className="grid mt-12 grid-cols-3 gap-10">
+            <div className="grid mt-12 grid-cols-2 lg:grid-cols-3 gap-10">
                 <div className="card bg-base-200 rounded-none">
                     <figure className="">
                         <img

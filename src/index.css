@@ -1,13 +1,22 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 
 
-.interFont{
+.interFont {
   font-family: "Inter", sans-serif;
 }
 
 .cinzelFont {
   font-family: "Cinzel", serif;
+}
+
+.carousel .thumb {
+  width: auto !important;
+  /* remove inline width */
+  height: auto !important;
+}
+
+.carousel .thumb img {
+  @apply w-16 h-10 sm:w-20 sm:h-10 md:w-24 md:h-12 lg:w-28 lg:h-16 object-cover;
 }
