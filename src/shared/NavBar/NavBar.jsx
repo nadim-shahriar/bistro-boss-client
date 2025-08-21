@@ -1,8 +1,23 @@
 import { Link, NavLink } from "react-router-dom";
-import cartOptionImg from "../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png"
 import { RiAccountCircleFill } from "react-icons/ri";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthContext";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../hooks/useCart";
+
+
 
 const NavBar = () => {
+
+    const { user, logOut } = useContext(AuthContext)
+    const [cart] = useCart()
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                console.log("Log Out Successfully")
+            })
+    }
 
     const navOptions = <>
         <NavLink to={'/'} className={({ isActive }) =>
@@ -25,11 +40,12 @@ const NavBar = () => {
             isActive ? 'text-yellow-400' : "text-base"}>
             <li className="uppercase font-semibold"><a>Our shop</a></li>
         </NavLink>
-        <NavLink to={'/cart'} className={({ isActive }) =>
-            isActive ? 'text-yellow-400' : "text-base"}>
-            <li className="uppercase font-semibold -ml-4"><a><img className="h-9" src={cartOptionImg} alt="" /></a></li>
+        <NavLink to={'dashboard/cart'}>
+            <li className="uppercase font-semibold -ml-4"><a><button className="btn  bg-transparent border-none">
+                <FaShoppingCart className="text-green-700 mr-3 text-2xl"></FaShoppingCart>
+                <div className="badge badge-secondary">+{cart.length}</div>
+            </button></a></li>
         </NavLink>
-
     </>
 
     return (
@@ -53,7 +69,14 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="">
-                <Link to={'/login'}><a className="btn uppercase -ml-5 w-36 mr-10 bg-transparent border-none shadow-none text-white font-bold">Sign Out<RiAccountCircleFill className="text-4xl"></RiAccountCircleFill></a></Link>
+                {
+                    user ?
+                        <div>
+                            <button onClick={handleLogOut} className="btn uppercase flex flex-col -ml-5 w-36 mr-10 bg-transparent border-none shadow-none text-white font-bold">Sign Out <span className="text-yellow-600">{user.displayName}</span></button>
+                        </div>
+                        : <Link to={'/login'}><a className="btn uppercase -ml-5 w-36 mr-10 bg-transparent border-none shadow-none text-white font-bold">Login<RiAccountCircleFill className="text-4xl"></RiAccountCircleFill></a></Link>
+                }
+
             </div>
         </div>
     );

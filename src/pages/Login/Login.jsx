@@ -4,17 +4,25 @@ import { FaGithub } from "react-icons/fa";
 import loginImg from '../../assets/others/authentication2.png'
 import './Login.css'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthContext";
+import Swal from 'sweetalert2'
+
 
 
 const Login = () => {
     const captchaRef = useRef(null)
     const [disable, setDisable] = useState(true)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/';
+
+    const { signIn } = useContext(AuthContext)
 
     useEffect(() => {
-
         loadCaptchaEnginge(6);
-
     }, [])
 
     const handleLogin = e => {
@@ -23,6 +31,23 @@ const Login = () => {
         const email = form.email.value
         const password = form.password.value
         console.log(email, password)
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                Swal.fire({
+                    title: "User Login Successfully.",
+                    showClass: {
+                        popup: `animate__animated animate__fadeInUp animate__faster`
+                    },
+                    hideClass: {
+                        popup: `animate__animated animate__fadeOutDown animate__faster`
+                    }
+                });
+                navigate(from, { replace: true })
+            })
+
     }
 
     const handleValidateCaptcha = () => {
@@ -30,14 +55,15 @@ const Login = () => {
         console.log(user_captcha_value)
 
         // onChange functionality
-        // if (user_captcha_value.length === 6 && validateCaptcha(user_captcha_value)) {
-        //     setDisable(false);
-        // }
-
-        if(validateCaptcha(user_captcha_value)){
-            setDisable(false)
+        if (user_captcha_value.length === 6 && validateCaptcha(user_captcha_value)) {
+            setDisable(false);
         }
-        else{
+
+        // onClick functionality
+        // if (validateCaptcha(user_captcha_value)) {
+        //     setDisable(false)
+        // }
+        else {
             setDisable(true)
         }
     }
@@ -61,13 +87,13 @@ const Login = () => {
                                 <div>
                                     <label className="label text-lg mb-3 font-bold text-black">Captcha</label>
                                     <LoadCanvasTemplate />
-                                    {/* <input onChange={handleValidateCaptcha} ref={captchaRef} name="captcha" type="text" className="input my-3 h-[50px] w-full" placeholder="Captcha" /> */}
-                                    <input ref={captchaRef} name="captcha" type="text" className="input  h-[50px] w-full" placeholder="Captcha" />
-                                    <input onClick={handleValidateCaptcha} className="btn bg-[#e0a03fde] h-[50px] text-white text-lg font-semibold " type="submit" value="Verify" />
+                                    <input onChange={handleValidateCaptcha} ref={captchaRef} name="captcha" type="text" className="input my-3 h-[50px] w-full" placeholder="Captcha" />
+                                    {/* <input ref={captchaRef} name="captcha" type="text" className="input  h-[50px] w-full" placeholder="Captcha" />
+                                    <input onClick={handleValidateCaptcha} className="btn bg-[#e0a03fde] h-[50px] text-white text-lg font-semibold " type="submit" value="Verify" /> */}
                                 </div>
                                 <input disabled={disable} className="btn bg-[#e0a03fde] h-[50px] text-white text-lg font-semibold mt-4" type="submit" value="Login" />
                             </form>
-                            <p className="text-[#D1A054B2] text-center my-3">New here? Create a New Account</p>
+                            <Link to={'/signup'}><p className="text-[#D1A054B2] hover:underline text-center my-3">New here? Create a New Account</p></Link>
                             <p className="text-center">Or Sign In With</p>
                             <div className="flex mt-3 gap-7 justify-center text-[#444444] text-lg">
                                 <a className="border-2 hover:bg-gray-300 p-3 rounded-full" href=""><TiSocialFacebook></TiSocialFacebook></a>
